@@ -47,6 +47,14 @@ Havonta: átalányban megállapított jövedelem, év eleje óta göngyölt áta
 
 Magyarázó szöveg legyen közvetlenül a göngyölt alap mellett: **az adómentes határ átlépése nem emeli automatikusan a tb-t vagy a szochót**. A tényleges havi alap főfoglalkozásban a göngyölt havi alap és a havi minimum közül a nagyobbik. A korábbi negyedévekben már figyelembe vett minimumalapok is levonódnak a következő negyedév göngyölítéséből.
 
+### A kitöltött táblázat letöltése PDF-ként
+
+Legyen jól látható **„Letöltés PDF-ként”** gomb. A gomb a böngészőben aktuálisan látható, már újraszámolt adatokból készítsen ténylegesen letölthető PDF-fájlt; a felhasználónak ne kelljen nyomtatóként PDF-et választania. A PDF készítése helyben történjen, pénzügyi adatokat ne küldjön külső szolgáltatásnak.
+
+A PDF tartalmazza a 2026-os címet, a készítés dátumát, a választott jogállást/költséghányadot/minimumalapot, a 12 havi bevitelt és számított értéket, a negyedéves és az éves vagy „eddig kitöltött” összesítést, a bevételi értékhatár állapotát, valamint rövid módszertani és korlátokra vonatkozó megjegyzést a NAV-forrás címével. Az üres hónapok maradjanak üresként jelölve, ne alakuljanak át 0 Ft-os hónappá. Hiányos negyedévnél a PDF is jelezze, hogy az érintett tb-/szochoeredmény még nem végleges; határtúllépésnél a figyelmeztetés a PDF-en is látszódjon.
+
+A havi táblázat és az összesítések jól olvasható, többoldalas nyomtatási elrendezést kapjanak. A magyar ékezetek, a forintformázás, az oszlopfejlécek és az oldaltörések legyenek rendben; lehetőség szerint kijelölhető szöveg kerüljön a PDF-be. Javasolt fájlnév: `atalanyado-kalkulator-2026-ÉÉÉÉHHNN.pdf`. Az export ugyanazt a számítási eredményt használja, mint a képernyő, nem vezet be külön adóképleteket.
+
 ## Számítási szabály és sorrend
 
 Az összes pénzösszeget egész forintként kezeld. Az Excel `ROUND(...,0)`-jával egyező kerekítést alkalmazd a nemnegatív összegekre. A számítást tiszta, Angular-független függvényekben végezd; a megjelenítés csak ezek eredményét fogyassza.
@@ -72,7 +80,7 @@ Az összes pénzösszeget egész forintként kezeld. Az Excel `ROUND(...,0)`-já
 
 ## Felhasználói élmény és adatkezelés
 
-Egyetlen főoldal elegendő: fejléc és forrás, beállítások, havi táblázat, negyedéves összesítő, éves/eddigi összesítő, módszertani magyarázat. Magyar forint formázás, egyértelmű mezőcímkék, billentyűzettel kezelhető mezők, hibajelzések a mezők mellett. A göngyölt havi alaphoz rövid „hogyan jött ki?” részletező nézet tartozzon: göngyölt adóköteles jövedelem, előző negyedévek tényleges alapja, biztosított hónapok száma, összehasonlítás a minimummal.
+Egyetlen főoldal elegendő: fejléc és forrás, beállítások, havi táblázat, negyedéves összesítő, éves/eddigi összesítő, PDF-letöltés, módszertani magyarázat. Magyar forint formázás, egyértelmű mezőcímkék, billentyűzettel kezelhető mezők, hibajelzések a mezők mellett. A göngyölt havi alaphoz rövid „hogyan jött ki?” részletező nézet tartozzon: göngyölt adóköteles jövedelem, előző negyedévek tényleges alapja, biztosított hónapok száma, összehasonlítás a minimummal.
 
 Az adatok alapértelmezés szerint a böngészőben maradjanak. Helyi automatikus mentés (`localStorage`) és „adatok törlése” művelet javasolt; ne küldje az adatokat szerverre. A mentett séma legyen verziózott, hogy későbbi változáskor biztonságosan kezelhető legyen. Más eszközön való folytatáshoz opcionális JSON export/import készülhet a fő funkciók után. A felhasználó valódi bevételi számait ne írjuk tesztbe vagy dokumentációba.
 
@@ -83,7 +91,8 @@ Az adatok alapértelmezés szerint a böngészőben maradjanak. Helyi automatiku
 3. A fenti számítás tiszta függvényekben, negyedévenkénti sorrendben. A korábbi negyedévek **tényleges** alapja kerüljön levonásra; ez a kulcsszabály.
 4. A beviteli mezők, validáció, számított havi sorok, negyedéves/éves összesítések, részletező magyarázat és forráslink kialakítása.
 5. Helyi mentés és visszatöltés; részben kitöltött negyedév és határtúllépés látható állapotai.
-6. Célzott automatikus tesztek, majd `npm test` és `npm run build`. Végül kézi ellenőrzés asztali és mobil szélességen.
+6. PDF-export a számítás közös eredményéből; magyar karakterek, hosszú havi táblázat, többoldalas tördelés és hiányos év állapotának kezelése.
+7. Célzott automatikus tesztek, majd `npm test` és `npm run build`. Végül kézi ellenőrzés asztali és mobil szélességen, valamint a letöltött PDF megnyitása és összevetése a képernyővel.
 
 ## Elfogadási ellenőrzések
 
@@ -94,7 +103,8 @@ Az adatok alapértelmezés szerint a böngészőben maradjanak. Helyi automatiku
 5. **Jogállások:** mellékállásúként nincs kötelező havi minimum; nyugdíjasként a normál tb és szocho 0. Az éves szja-számítás jogállástól függetlenül működik.
 6. **Hiányzó hónap, nulla hónap, szünetelés:** az üres bevétel ne legyen egyenértékű a nullával; teljes havi szünetelésnél nincs havi járulékalap; részleges szünetelés ne csökkentse automatikusan a minimumalapot.
 7. **Határok és kerekítés:** 1 936 800 Ft adómentes jövedelem pontos határa, 45/80/90% választás, időarányos bevételi limit és a havi, majd összesített kerekítések egyezzenek az Excellel.
+8. **PDF-letöltés:** a gomb `.pdf` fájlt tölt le; a fájl megnyitható, a 12 hónap és az összesítés olvasható, az ékezetek helyesek, és a számok megegyeznek a képernyőn látottakkal. Külön ellenőrizd teljesen kitöltött és részben kitöltött évvel, valamint bevételihatár-túllépés esetén. A PDF-készítés közben nincs hálózati kérés a pénzügyi adatokkal.
 
 ## Elkészültnek akkor tekinthető
 
-A felhasználó a 12 hónapot kitöltheti, az eredmény minden változtatásra újraszámolódik, a számítás magyarázható, a részleges év nincs teljes évként feltüntetve, a releváns korlátok és NAV-forrás láthatók, a helyi mentés működik, és a fenti ellenőrzések, a teszt és a build sikeresek.
+A felhasználó a 12 hónapot kitöltheti, az eredmény minden változtatásra újraszámolódik, a számítás magyarázható, a részleges év nincs teljes évként feltüntetve, a releváns korlátok és NAV-forrás láthatók, a helyi mentés és a kitöltött táblázat PDF-letöltése működik, és a fenti ellenőrzések, a teszt és a build sikeresek.

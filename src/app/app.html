@@ -1,7 +1,7 @@
 <div class="shell">
   <header class="site-header">
     <div class="identity"><span class="brand-mark">26</span><div><h1>Átalányadó-kalkulátor</h1><p>2026 · egyéni vállalkozóknak</p></div></div>
-    <span class="local-note">Az adatok a böngészőben maradnak</span>
+    <div class="header-actions"><span class="local-note">Az adatok a böngészőben maradnak</span><button mat-flat-button type="button" [disabled]="state.hasErrors() || downloading()" (click)="downloadPdf()">{{ downloading() ? 'PDF készül…' : 'Letöltés PDF-ként' }}</button></div>
   </header>
   <main>
     <app-settings />
@@ -12,6 +12,7 @@
       <span>SZJA <b>15%</b> · TB <b>18,5%</b> · Szocho <b>13%</b></span>
     </div>
     @if (state.hasErrors()) { <div class="error-banner" role="alert">Javítsd a jelölt mezőket az eredmények megjelenítéséhez.</div> }
+    @if (pdfError()) { <div class="error-banner" role="alert">{{ pdfError() }}</div> }
     <app-summary />
     <app-months />
     <details class="method">

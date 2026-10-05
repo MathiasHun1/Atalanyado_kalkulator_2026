@@ -11,6 +11,8 @@ npm start
 
 Ezután a `http://localhost:4200/` címen használható. Az alkalmazás nem hív API-t; a bevitt adatok verziózott sémával a böngésző `localStorage` tárában maradnak. Az „Adatok törlése” gomb visszaállítja az alapállapotot.
 
+A „Letöltés PDF-ként” gomb a pillanatnyi számításból helyben készít többoldalas, szöveges PDF-et. A PDF-generátor és a betűkészlet csak a gomb használatakor töltődik be az alkalmazás saját fájljaiból.
+
 ## Ellenőrzés
 
 ```bash

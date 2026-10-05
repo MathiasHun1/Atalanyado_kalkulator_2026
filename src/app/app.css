@@ -5,6 +5,8 @@
 .brand-mark { display:grid; place-items:center; width:33px; height:33px; border-radius:9px; background:#0b695e; color:white; font-weight:800; }
 h1 { margin:0; font-size:1.25rem; line-height:1.18; color:#173e49; letter-spacing:-.03em; }
 .identity p { margin:2px 0 0; color:#6a7b81; font-size:.77rem; }
+.header-actions { display:flex; align-items:center; gap:14px; }
+.header-actions button { white-space:nowrap; }
 .local-note { color:#5e7779; font-size:.78rem; }
 .rules-strip { display:flex; align-items:center; flex-wrap:wrap; gap:6px 22px; min-height:42px; padding:7px 8px; color:#5d7078; font-size:.77rem; }
 .rules-strip span { white-space:nowrap; }
@@ -17,3 +19,4 @@ h1 { margin:0; font-size:1.25rem; line-height:1.18; color:#173e49; letter-spacin
 .footer-actions { display:flex; align-items:center; justify-content:space-between; gap:12px; padding-top:10px; }
 .footer-actions a { color:#0a6b5d; font-size:.8rem; font-weight:700; }
 @media(max-width:700px) { .shell { padding:0 12px 24px; } .local-note { display:none; } .rules-strip { gap:6px 14px; } .rules-strip span { white-space:normal; } .method-content { grid-template-columns:1fr; } }
+@media(max-width:480px) { .site-header { flex-wrap:wrap; padding:12px 0; } .header-actions { width:100%; } .header-actions button { width:100%; } }
