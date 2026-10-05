@@ -1,59 +1,25 @@
-# Untitled
+# 2026-os átalányadó-kalkulátor
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.1.
+Magyar nyelvű, böngészőben futó Angular 22 és Angular Material alkalmazás átalányadózó egyéni vállalkozók 2026-os bevételének és közterheinek áttekintésére.
 
-## Development server
-
-To start a local development server, run:
+## Indítás
 
 ```bash
-ng serve
+npm install
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Ezután a `http://localhost:4200/` címen használható. Az alkalmazás nem hív API-t; a bevitt adatok verziózott sémával a böngésző `localStorage` tárában maradnak. Az „Adatok törlése” gomb visszaállítja az alapállapotot.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Ellenőrzés
 
 ```bash
-ng generate component component-name
+npm test -- --watch=false
+npm run build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+A számítás a `src/app/calculator.ts` tiszta függvényében van. A `calculator-state.service.ts` kezeli a signal állapotot, a validációt és a helyi mentést. A felület külön beállítás-, havi adat- és összesítő komponensekből áll. A tesztek között szerepel a NAV tájékoztató 8–9. oldali negyedéves mintája.
 
-```bash
-ng generate --help
-```
+## Forrás és határok
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Az alkalmazás kizárólag a 2026-os évre készült. A szabályok elsődleges forrása a [NAV 100. információs füzetének 2026. február 20-i változata](https://nav.gov.hu/pfile/file?path=/ugyfeliranytu/nezzen-utana/inf_fuz/2026/100.-Az-egyeni-vallalkozok-atalanyadozasanak-alapveto-szabalyai-2026.-02.-20). A kalkulátor tájékoztató jellegű; a fő korlátok és a bevételi értékhatár figyelmeztetése a felületen olvashatók. Bevallás előtt az eredményt a NAV adataival egyeztetni kell.

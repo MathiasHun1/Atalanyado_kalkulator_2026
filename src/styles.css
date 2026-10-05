@@ -1,1 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; background:#f3f7f7; color:#193d4b; font-family:"Segoe UI",Arial,sans-serif; }
+button,input,select { font:inherit; }

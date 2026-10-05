@@ -1,12 +1,20 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { CalculatorStateService } from './calculator-state.service';
+import { MonthsComponent } from './months.component';
+import { SettingsComponent } from './settings.component';
+import { SummaryComponent } from './summary.component';
+import { forint } from './format';
+import { RULES } from './calculator';
 
 @Component({
-  imports: [RouterOutlet],
   selector: 'app-root',
-  styleUrl: './app.css',
+  imports: [MatButtonModule, MonthsComponent, SettingsComponent, SummaryComponent],
   templateUrl: './app.html',
+  styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('untitled');
+  readonly state = inject(CalculatorStateService);
+  readonly ft = forint;
+  readonly rules = RULES;
 }
