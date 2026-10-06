@@ -20,6 +20,7 @@ describe('2026 calculator', () => {
     const cumulativeBases = [2, 5, 8, 11].map(index => result.months.slice(0, index + 1)
       .reduce((total, current) => total + (current.actualBase ?? 0), 0));
     expect(cumulativeBases).toEqual([677_880, 1_646_280, 2_291_880, 3_217_240]);
+    expect(result.quarters.map(quarter => quarter.income)).toEqual([1_650_000, 800_000, 1_300_000, 600_000]);
     expect(result.quarters.map(quarter => quarter.base)).toEqual([0, 0, 83_460, 40_440]);
     expect(result.months[1].actualBase).toBe(32_280);
     expect(result.months[7].actualBase).toBe(0);

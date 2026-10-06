@@ -39,6 +39,7 @@ export interface QuarterResult {
   previousActualBases: number;
   base: number | null;
   revenue: number;
+  income: number;
   incomeTax: number;
   socialSecurity: number | null;
   socialContribution: number | null;
@@ -137,7 +138,8 @@ export function calculate(input: CalculatorInput): Calculation {
     const socialContribution = complete ? sum(result.map(month => month.socialContribution ?? 0)) : null;
     quarters.push({
       complete, insuredMonths, cumulativeTaxable, previousActualBases: previousBasesForQuarter,
-      base, revenue: sum(result.map(month => month.revenue ?? 0)), incomeTax,
+      base, revenue: sum(result.map(month => month.revenue ?? 0)),
+      income: sum(result.map(month => month.income ?? 0)), incomeTax,
       socialSecurity, socialContribution,
       totalTax: complete ? incomeTax + (socialSecurity ?? 0) + (socialContribution ?? 0) : null,
     });

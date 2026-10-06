@@ -43,7 +43,7 @@ export function buildPdfDefinition(input: CalculatorInput, result: Calculation, 
   });
   const quarterRows = result.quarters.map((quarter, index) => [
     `${QUARTERS[index]} ${quarter.complete ? 'negyedév' : 'negyedév – hiányos'}`,
-    forintNumber(quarter.revenue),
+    forintNumber(quarter.revenue), forintNumber(quarter.income),
     quarter.complete ? forintNumber(quarter.incomeTax) : '—',
     forintNumber(quarter.socialSecurity), forintNumber(quarter.socialContribution), forintNumber(quarter.totalTax),
   ]);
@@ -76,7 +76,7 @@ export function buildPdfDefinition(input: CalculatorInput, result: Calculation, 
     table(['Hónap', 'Bevétel', 'Bizt.', 'Nap', 'Átalányjöv.', 'Adóköteles', 'SZJA', 'TB', 'Szocho', 'Összes'], monthlyRows, [68, 81, 36, 29, 83, 85, 73, 72, 72, 83]),
     { text: 'A „—” hiányzó vagy még nem végleges adatot jelöl. A „— (üres)” bevételi mező nem azonos a 0 Ft-tal.', style: 'meta' },
     { text: 'Negyedéves összesítés (Ft)', style: 'section' },
-    table(['Időszak', 'Bevétel', 'SZJA-előleg', 'TB-járulék', 'Szocho', 'Összes közteher'], quarterRows, [130, 130, 125, 125, 120, 130]),
+    table(['Időszak', 'Bevétel', 'Átalányjöved.', 'SZJA-előleg', 'TB-járulék', 'Szocho', 'Összes közteher'], quarterRows, [92, 113, 113, 110, 110, 110, 120]),
     { text: 'Hiányos negyedévnél a TB- és szochoeredmény még nem végleges.', style: 'meta' },
     { text: 'Havi számítás részletei (Ft)', style: 'section', pageBreak: 'before' },
     table(['Hónap', 'Megjegyzés', 'Göngyölt átalányjöv.', 'Göngyölt adóköteles', 'Göngyölt havi alap', 'Minimumalap', 'Tényleges alap'], detailRows, [69, 178, 104, 106, 106, 92, 105]),

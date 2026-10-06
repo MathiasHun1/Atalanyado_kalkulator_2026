@@ -59,7 +59,7 @@ import { forint, forintNumber } from './format';
                   @let quarter = calculation ? calculation.quarters[quarterIndex(i)] : null;
                   <tr class="quarter-row">
                     <th scope="row" colspan="4">{{ roman[quarterIndex(i)] }}. negyedév <span [class.pending]="!quarter?.complete">{{ quarter?.complete ? 'végleges' : 'hiányos' }}</span><small>{{ quarter?.complete ? 'Bevétel:' : 'Bevétel eddig:' }} {{ quarter ? ft(quarter.revenue) : '—' }}</small></th>
-                    <td class="numeric">—</td><td class="numeric">{{ quarter && quarter.complete ? amount(quarter.incomeTax) : '—' }}</td><td class="numeric">{{ quarter ? amount(quarter.socialSecurity) : '—' }}</td><td class="numeric">{{ quarter ? amount(quarter.socialContribution) : '—' }}</td><td class="numeric total-cell">{{ quarter ? amount(quarter.totalTax) : '—' }}</td><td></td>
+                    <td class="numeric">{{ quarter ? amount(quarter.income) : '—' }}</td><td class="numeric">{{ quarter && quarter.complete ? amount(quarter.incomeTax) : '—' }}</td><td class="numeric">{{ quarter ? amount(quarter.socialSecurity) : '—' }}</td><td class="numeric">{{ quarter ? amount(quarter.socialContribution) : '—' }}</td><td class="numeric total-cell">{{ quarter ? amount(quarter.totalTax) : '—' }}</td><td></td>
                   </tr>
                 }
               }
